@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "net.johnhany.ndk"
         minSdkVersion 16
@@ -13,13 +13,13 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11", "-frtti", "-fexceptions"
-                abiFilters 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'mips64'
+                abiFilters 'armeabi-v7a'
             }
         }
     }
     sourceSets {
         main {
-            jniLibs.srcDirs = ['C:/Users/wo/Desktop/opencv-3.2.0-android-sdk/OpenCV-android-sdk/sdk/native/libs']
+            jniLibs.srcDirs = ['/Users/qingting/Documents/workspace/OpenCV-android-sdk/sdk/native/libs']
         }
     }
     buildTypes {

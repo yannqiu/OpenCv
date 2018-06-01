@@ -11,9 +11,9 @@ cmake_minimum_required(VERSION 3.4.1)
 # Gradle automatically packages shared libraries with your APK.
 
 set(CMAKE_VERBOSE_MAKEFILE on)
-set(ocvlibs "C:/Users/wo/Desktop/opencv-3.2.0-android-sdk/OpenCV-android-sdk/sdk/native/libs")
+set(ocvlibs "/Users/qingting/Documents/workspace/OpenCV-android-sdk/sdk/native/libs")
 
-include_directories(C:/Users/wo/Desktop/opencv-3.2.0-android-sdk/OpenCV-android-sdk/sdk/native/jni/include)
+include_directories(/Users/qingting/Documents/workspace/OpenCV-android-sdk/sdk/native/jni/include)
 
 add_library(libopencv_java3 SHARED IMPORTED )
 set_target_properties(libopencv_java3 PROPERTIES
