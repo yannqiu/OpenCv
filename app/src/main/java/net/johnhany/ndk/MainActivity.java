@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private Button btnProc;
     private ImageView imageView;
-    private Bitmap bmp;
+    private Bitmap normalBitmap;
+    private Bitmap testBitmap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.activity_main);
         btnProc = (Button) findViewById(R.id.btn_gray_process);
         imageView = (ImageView) findViewById(R.id.image_view);
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.testpic1);
-        imageView.setImageBitmap(bmp);
-        btnProc.setOnClickListener(this);
+        normalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.normal);
+        testBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        imageView.setImageBitmap(normalBitmap);
+        onClick(null);
     }
 
     static {
@@ -35,15 +37,22 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        int w = bmp.getWidth();
-        int h = bmp.getHeight();
+        int w = normalBitmap.getWidth();
+        int h = normalBitmap.getHeight();
         int[] pixels = new int[w*h];
-        bmp.getPixels(pixels, 0, w, 0, 0, w, h);
-        double[] resultInt = FeatureNdkManager.featuresCal(pixels, w, h);
-        for (int i = 0; i < resultInt.length; i++) {
-            Log.d("MainActivity", "feature:" + resultInt[i]);
-        }
-        double result = FeatureNdkManager.featuresResult(resultInt, resultInt);
+        normalBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
+        double[] resultNormal = FeatureNdkManager.featuresCal(pixels, w, h);
+
+        int w1 = testBitmap.getWidth();
+        int h1 = testBitmap.getHeight();
+        int[] pixels1 = new int[w1*h1];
+        testBitmap.getPixels(pixels1, 0, w1, 0, 0, w1, h1);
+        double[] resultTest = FeatureNdkManager.featuresCal(pixels1, w1, h1);
+
+//        for (int i = 0; i < resultNormal.length; i++) {
+//            Log.d("MainActivity", "feature:" + resultNormal[i]);
+//        }
+        double result = FeatureNdkManager.featuresResult(resultNormal, resultTest);
         Log.d("MainActivity", "result:" + result);
 //        Bitmap resultImg = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 //        resultImg.setPixels(resultInt, 0, w, 0, 0, w, h);
